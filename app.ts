@@ -1,6 +1,6 @@
 import express from "express";
 // import "express-async-errors";
-import { createTrpcMiddleware } from "./trpc";
+import { createTrpcMiddleware } from "./trpc-middleware";
 
 export const createApp = async () => {
   const app = express();

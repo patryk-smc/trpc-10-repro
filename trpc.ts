@@ -8,8 +8,6 @@
  * @see https://trpc.io/docs/v10/procedures
  */
 import { initTRPC } from "@trpc/server";
-import * as trpcExpress from "@trpc/server/adapters/express";
-import { helloWorldRouter } from "./helloWorldRouter";
 
 const t = initTRPC.context().create({
   /**
@@ -47,23 +45,3 @@ export const middleware = t.middleware;
  * @see https://trpc.io/docs/v10/merging-routers
  */
 export const mergeRouters = t.mergeRouters;
-
-export const appRouter = router({
-  greeting: publicProcedure.query(() => "hello tRPC v10!"),
-  helloWorld: helloWorldRouter,
-});
-
-export const createTrpcMiddleware = () => {
-  return trpcExpress.createExpressMiddleware({
-    router: appRouter,
-    //  createContext,
-    onError: (error: any) => {
-      // logger.error(error)
-    },
-  });
-};
-
-// only export *type signature* of router!
-// to avoid accidentally importing your API
-// into client-side code
-export type AppRouter = typeof appRouter;
