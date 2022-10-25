@@ -48,6 +48,11 @@ export const middleware = t.middleware;
  */
 export const mergeRouters = t.mergeRouters;
 
+export const appRouter = router({
+  greeting: publicProcedure.query(() => "hello tRPC v10!"),
+  helloWorld: helloWorldRouter,
+});
+
 export const createTrpcMiddleware = () => {
   return trpcExpress.createExpressMiddleware({
     router: appRouter,
@@ -57,11 +62,6 @@ export const createTrpcMiddleware = () => {
     },
   });
 };
-
-export const appRouter = router({
-  greeting: publicProcedure.query(() => "hello tRPC v10!"),
-  helloWorld: helloWorldRouter,
-});
 
 // only export *type signature* of router!
 // to avoid accidentally importing your API
